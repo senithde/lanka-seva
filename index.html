@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Lanka Seva Concept v1.0 · Senith Edirisinghe</title>
+<meta name="description" content="Lanka Seva — A speculative UX concept for a Sri Lanka Government Super App. 26-page wireframe case study by Senith Edirisinghe." />
+<meta name="author" content="Senith Edirisinghe" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Open Graph for LinkedIn sharing -->
+<meta property="og:title" content="Lanka Seva · Sri Lanka Government Super App — UX Concept" />
+<meta property="og:description" content="A speculative UX concept combining 100+ wireframes into a single publication-ready case study. By Senith Edirisinghe." />
+<meta property="og:type" content="website" />
+
+<!-- Google Fonts — Inter + Noto Sans Sinhala -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Wireframe base styles -->
+<link rel="stylesheet" href="wireframe.css" />
+<!-- Publication layout -->
+<link rel="stylesheet" href="publication.css" />
+<!-- Final publication overrides (no version refs, annotations below, life-stage styles) -->
+<link rel="stylesheet" href="publication-final.css" />
+</head>
+<body>
+<div id="root"></div>
+
+<!-- React 18 + Babel for JSX (prototype mode, no build step needed) -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<!-- Shared wireframe primitives (Phone, Header, TabBar, Input, LSMark, etc.) -->
+<script type="text/babel" src="wf-components.jsx"></script>
+<!-- Lanka Seva logo variants (LSMonogram, LogoV1, LogoV2, LogoV3) -->
+<script type="text/babel" src="logo.jsx"></script>
+<!-- Wireframe screens: Onboarding O1–O8, Auth A1–A3, Home H1–H2, Services S1–S9, QR Q1–Q7, Profile P1–P11, Supporting X1–X8 -->
+<script type="text/babel" src="screens-1.jsx"></script>
+<!-- Wireframe screens: Locate L1–L3 -->
+<script type="text/babel" src="screens-2.jsx"></script>
+<!-- V2 screens: Missing M1–M4, Documents D1–D3, Bills B1–B3, Payment flow PF1–PF2, Notifications N, Household HH, Enhanced home H1v2 -->
+<script type="text/babel" src="screens-v2.jsx"></script>
+<!-- V3 screens: Login system L1–L5, Add child A1–A5, Child profile/home C1–C3, Health H1–H3, Transitions T1–T2, Approval G1–G3 -->
+<script type="text/babel" src="screens-v3.jsx"></script>
+<!-- Publication content: Personas, HMW, Principles, Journeys, Competitive reference, PubWfRow -->
+<script type="text/babel" src="pub-content.jsx"></script>
+<!-- Final publication components: Cover, Life-stage, Conversation page, Closing, AnnoBlock, FinalWfPage -->
+<script type="text/babel" src="pub-final.jsx"></script>
+
+<script type="text/babel">
+const TOTAL = 26;
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 02 — The Problem
+// ═══════════════════════════════════════════════════════════════
+function P_Problem() {
+  const problems = [
+    ['Low awareness',`Citizens don't know which digital services exist or where to find them. The Deputy Minister himself stated: "There is no central place for citizens to access them." `, 'biometricupdate.com, October 2025', 'https://www.biometricupdate.com/?s=Sri+Lanka+government+super+app'],
+    ['No direct citizen app',`GovPay requires opening a banking app first, finding GovPay inside it, then navigating. No standalone government app exists.`],
+    ['Institution-first navigation',`Must know "Sri Lanka Police" to pay a traffic fine. Citizens don't think in departments — they think in tasks.`],
+    ['No receipts or confirmation',`Payment confirmation lives in the banking app, not on the government platform. Citizens have no proof of payment in one accessible place.`],
+    ['English-only UX',`Most government platforms are English-first. Large portions of the population are more comfortable in Sinhala or Tamil.`],
+    ['Weak trust signals',`Citizens don't know if the platform is official, if their money is protected, or what to do if something goes wrong.`],
+  ];
+  return (
+    <PubFinalPage title="The Problem" subtitle="Why Lanka Seva needs to exist" page={2} total={TOTAL}>
+      <div className="pub-card outline" style={{ background:'#fff8ed', borderColor:'#d97706', marginBottom: 16 }}>
+        <span className="label">Problem statement</span>
+        <p style={{ fontSize: 16, lineHeight: 1.45 }}>
+          Sri Lankan citizens are forced to navigate dozens of disconnected government websites,
+          mobile apps, and physical offices to access everyday services — each with different login
+          systems, languages, and interfaces. This fragmentation creates confusion, wastes time,
+          costs money in travel, and digitally excludes citizens who are not comfortable with
+          English or unreliable internet.
+        </p>
+      </div>
+
+      <div className="pub-grid-3" style={{ marginBottom: 16 }}>
+        {problems.map(([t,b,src,url],i)=>(
+          <div key={i} className="pub-card tight">
+            <span className="label">Problem {i+1}</span>
+            <h4>{t}</h4>
+            <p style={{ fontSize: 12.5, lineHeight: 1.4 }}>{b}</p>
+            {src && (
+              <div className="pub-source">
+                Source: {url
+                  ? <a href={url} target="_blank" rel="noopener" style={{ color:'#d97706', textDecoration:'underline' }}>{src}</a>
+                  : src}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <span className="pub-overline" style={{ display:'block', marginBottom: 8, color:'#c43a48' }}>The cost of the problem · 3 real scenarios</span>
+      <div className="pub-grid-3">
+        <div className="pub-cost">
+          <div className="who">Sampath · 56 · Maharagama</div>
+          <div className="what">"Lost a full working day for one signature — the 'Go to Room 4, then Room 10' problem."</div>
+        </div>
+        <div className="pub-cost">
+          <div className="who">Anjali · 29 · Colombo 7</div>
+          <div className="what">"Rs. 15,000 payment gateway timed out. No confirmation. Didn't know if money was taken."</div>
+        </div>
+        <div className="pub-cost">
+          <div className="who">Bandara · 41 · Anuradhapura</div>
+          <div className="what">"Travelled 12km by bus to find the officer was in a meeting. Wasted an entire day's income."</div>
+        </div>
+      </div>
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 03 — User Research
+// ═══════════════════════════════════════════════════════════════
+function P_Research() {
+  const insights = [
+    ['1','Time and travel cost is the biggest pain','Rural citizens lose an entire working day per government interaction. Bus fare is wasted when the trip fails.'],
+    ['2','Status anxiety is universal','All 3 participants wanted to know what was happening with their application without calling anyone.'],
+    ['3','Half-digital is worse than fully manual','Starting online then being told to visit an office anyway wastes time both digitally and physically.'],
+    ['4','Language barriers exclude the most vulnerable','English-only sites aren\'t a preference issue — they\'re a barrier to accessing legal rights and welfare.'],
+    ['5','Trust comes from tangibility','"If I have a paper receipt in my hand, I feel safe." Digital must replicate the feeling of physical proof.'],
+    ['6','Connectivity is unreliable outside Colombo','Mobile data is unstable in rural areas. Heavy pages don\'t load. 3G is the real constraint.'],
+  ];
+  return (
+    <PubFinalPage title="User Research" subtitle="In-depth qualitative interviews · 3 participants · 15 min each" page={3} total={TOTAL}>
+      <div style={{ marginBottom: 14, padding: 12, background:'#fff8ed', borderLeft:'3px solid #d97706', borderRadius: 4 }}>
+        <span style={{ fontFamily:'JetBrains Mono', fontSize: 10, color:'#d97706', textTransform:'uppercase', letterSpacing:'0.06em', display:'block', marginBottom: 4 }}>Why qualitative?</span>
+        <p style={{ fontFamily:'Caveat', fontSize: 17, fontStyle:'italic', color:'#1a1815', lineHeight: 1.35, margin: 0 }}>
+          The depth of pain — not the breadth of it — was the missing layer. Existing reports already tell us <i>that</i> services are fragmented.
+          What they don't tell us is what it <i>feels</i> like.
+        </p>
+      </div>
+
+      <div className="pub-2col">
+        <div className="col-main">
+          <div className="pub-card outline" style={{ marginBottom: 12 }}>
+            <span className="label">Method</span>
+            <h4 style={{ marginBottom: 6 }}>In-depth qualitative interviews</h4>
+            <p>
+              <b>Participants:</b> 3 people · 15 minutes each<br/>
+              <b>Selection criteria:</b> different demographics, locations, digital literacy levels<br/>
+              <b>Setting:</b> in-person · semi-structured · open-ended follow-ups
+            </p>
+          </div>
+
+          <div className="pub-card" style={{ marginBottom: 12 }}>
+            <span className="label">5 interview questions</span>
+            <ol style={{ fontFamily:'Kalam', fontSize: 13, lineHeight: 1.55, margin: 0, paddingLeft: 18 }}>
+              <li>When was the last time you dealt with a government service?</li>
+              <li>Walk me through what you did — how did you find out what to do?</li>
+              <li>What was the most frustrating part?</li>
+              <li>Have you ever tried to do it online? What happened?</li>
+              <li>If there was a single app, what would you want first?</li>
+            </ol>
+          </div>
+
+          <span className="pub-overline">6 research insights</span>
+          <div className="pub-grid-2">
+            {insights.map(([n,t,b])=>(
+              <div key={n} className="pub-sticky">
+                <span className="num">INSIGHT {n}</span>
+                <b>{t}</b>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="col-side">
+          <div className="pub-figjam">
+            <div className="head">
+              <span className="dot" /><span className="dot" style={{ background:'#1e9459' }} /><span className="dot" style={{ background:'#c43a48' }} />
+              <span className="title">FigJam · Research synthesis board</span>
+            </div>
+            <div className="notes">
+              {Array.from({length: 24}).map((_,i)=>(
+                <div key={i} className="note">
+                  {[
+                    'Lost day · GN office',
+                    'Paper receipt = trust',
+                    'NIC entered 50x',
+                    'Sinhala-only please',
+                    'Heavy site = no load',
+                    'Status check pls',
+                    'Bus fare wasted',
+                    'Govpay = where?',
+                    'Room 4 → Room 10',
+                    'OTP slow',
+                    'Officer absent',
+                    'No SMS reply',
+                    'Receipt lost',
+                    'WhatsApp confident',
+                    '3G fails',
+                    'Aswesuma date?',
+                    'Wife handles app',
+                    'Renew late = fine',
+                    'Bus 12km',
+                    'Don\'t know rules',
+                    'Brother helps',
+                    'Photo not clear',
+                    'No biometric trust',
+                    'Save the receipt'
+                  ][i]}
+                </div>
+              ))}
+            </div>
+            <Mono tiny style={{ display:'block', marginTop: 8, color:'#4a4640' }}>
+              24 sticky notes · clustered into 6 insights · 3 personas
+            </Mono>
+          </div>
+        </div>
+      </div>
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 04 — Personas
+// ═══════════════════════════════════════════════════════════════
+function P_Personas() {
+  return (
+    <PubFinalPage title="Three user personas" subtitle="Different demographics · different needs · same right to government services" page={4} total={TOTAL}>
+      <PubPersonas />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 05 — HMW
+// ═══════════════════════════════════════════════════════════════
+function P_HMW() {
+  return (
+    <PubFinalPage title="How might we…" subtitle="9 design questions that shaped Lanka Seva" page={5} total={TOTAL}>
+      <PubFinalHMW />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 06 — Solution
+// ═══════════════════════════════════════════════════════════════
+function P_Solution() {
+  return (
+    <PubFinalPage title="The proposed solution" subtitle="Lanka Seva · ලංකා සේවා · Your government. One app." page={6} total={TOTAL}>
+      <div className="pub-grid-2" style={{ marginBottom: 14, gap: 14 }}>
+        <div className="pub-card amber">
+          <span className="label">What Lanka Seva is</span>
+          <p style={{ fontSize: 14.5 }}>
+            A unified government mobile app for Sri Lanka that consolidates all citizen-facing
+            services into a single trusted multilingual platform — organised by what citizens
+            need to do (<b>task-first</b>), not which department to visit (<b>institution-first</b>).
+          </p>
+        </div>
+        <div className="pub-card outline">
+          <span className="label">Inspiration &amp; reference</span>
+          <p style={{ fontSize: 13.5, lineHeight: 1.45 }}>
+            Based on the <a href="https://www.icta.lk/projects/digital-government/government-super-app" target="_blank" rel="noopener" style={{ color:'#2B5FA8', textDecoration:'underline', textUnderlineOffset:'2px' }}>publicly documented Sri Lanka Government Super App initiative</a> (Ministry of Digital Economy + ICTA, 2025). Reference model: India's <b>UMANG app</b> (2,500+ services).
+            Lanka Seva improves on UMANG's 3 key failures:
+          </p>
+          <ol style={{ fontFamily:'Kalam', fontSize: 13, lineHeight: 1.5, margin: '6px 0 0', paddingLeft: 18 }}>
+            <li>No broken redirects — full flows stay inside the app</li>
+            <li>Offline mode — core features work without internet</li>
+            <li>Better error handling — every payment state is designed</li>
+          </ol>
+        </div>
+      </div>
+
+      <span className="pub-overline">8 design principles · each addressing a real persona need</span>
+      <PubPrinciples />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 07 — App Structure
+// ═══════════════════════════════════════════════════════════════
+function P_Structure() {
+  return (
+    <PubFinalPage title="App structure" subtitle="Complete navigation map · five tabs · supporting screens · family system" page={7} total={TOTAL}>
+      <div className="pub-2col" style={{ gridTemplateColumns:'1.7fr 1fr' }}>
+        <div className="col-main">
+          <PubFinalSitemap />
+          <div className="pub-sitemap-note">
+            "The app structure evolved significantly during the research and design process.
+            Key decisions: QR Pay as a dedicated centre tab, Profile replacing the original
+            My Space concept, and the Family &amp; Children system added after identifying the
+            under-18 access gap."
+          </div>
+        </div>
+        <div className="col-side">
+          <div className="pub-card amber tight" style={{ marginBottom: 12 }}>
+            <span className="label">Family &amp; Children system</span>
+            <p style={{ fontSize: 12.5 }}>
+              Login: Under-18 detected → family sign-in → parent approval<br/>
+              Add child: birth cert → verification → profile setup<br/>
+              Child home (restricted) · Child services · Child health card<br/>
+              Age 16 transition · Age 18 transition · Guardian approval system
+            </p>
+          </div>
+          <div className="pub-card outline tight">
+            <span className="label">EDL note</span>
+            <p style={{ fontSize: 12.5 }}>
+              Electricity Distribution Lanka (EDL) replaced Ceylon Electricity Board on
+              <b> 9 March 2026</b> — all electricity screens reflect the new entity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 08 — Journey: Sampath
+// ═══════════════════════════════════════════════════════════════
+function P_Journey1() {
+  return (
+    <PubFinalPage title="User journey · Sampath pays a traffic fine" subtitle="Flagship flow · 7 stages · the canonical payment pattern used across the app" page={8} total={TOTAL}>
+      <PubJourney1 />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 09 — Journeys: Bandara & Anjali
+// ═══════════════════════════════════════════════════════════════
+function P_Journey23() {
+  return (
+    <PubFinalPage title="User journeys · Bandara &amp; Anjali"
+      subtitle="Family health appointment · bill payment with anomaly detection"
+      page={9} total={TOTAL}>
+      <div style={{ display:'flex', flexDirection:'column', gap: 18 }}>
+        <PubJourney
+          title="Bandara books Kavindu's health appointment"
+          arc={['Surprised','Informed','Impressed','In control','Organised']}
+          stages={[
+            { stage:'1 · Trigger', action:'Notification "MMR booster due for Kavindu · July 2026 · Book now"', emotion:'Surprised — didn\'t know this was possible', pain:'Didn\'t realise app tracks immunisations', opp:'Proactive health reminder builds trust and habit' },
+            { stage:'2 · Review', action:'Taps notification · opens Kavindu\'s health card · sees history · 8 of 9 complete', emotion:'Informed, reassured', pain:'Worried about travelling to hospital unnecessarily', opp:'Officer availability equivalent — show clinic availability before visiting' },
+            { stage:'3 · Booking', action:'Type pre-filled from health card · hospital pre-filled from MOH area · picks date and time', emotion:'Impressed — "it already knows what he needs"', pain:'Doesn\'t know which hospital to choose', opp:'Pre-filled from child profile removes all decision friction' },
+            { stage:'4 · Approval', action:'Booking request sent to Bandara (parent) · approves · appointment confirmed', emotion:'In control, trusted as parent', pain:'10-minute approval window feels pressured', opp:'"Auto-approve health appointments" toggle removes friction for trusted recurring actions' },
+            { stage:'5 · Confirmation', action:'Confirmed · added to calendar · parent notification · reminder 1 day before', emotion:'Organised, competent', pain:'May forget appointment without reminder', opp:'Dual reminders (parent + child device) with hospital address + clinic name' },
+          ]} />
+        <PubJourney
+          title="Anjali pays electricity bill with anomaly detection"
+          arc={['Concerned','Informed','In control','Curious','Satisfied']}
+          stages={[
+            { stage:'1 · Notification', action:'"EDL bill due in 3 days · Rs. 3,450 · ⚠ 38% higher than usual"', emotion:'Concerned — higher than expected', pain:'Doesn\'t know why bill is higher', opp:'Usage anomaly alert explains causes (AC, heater, lights left on)' },
+            { stage:'2 · Review', action:'Opens bill · breakdown + 6-month chart with average line · current month highlighted', emotion:'Informed — understands why it\'s higher', pain:'Worried about forgetting to pay before due date', opp:'Visual chart comparison makes anomaly obvious — no calculation needed' },
+            { stage:'3 · Payment decision', action:'Sees Pay now + Schedule · decides to schedule for payday (25 May)', emotion:'In control — payment on her terms', pain:'Unsure if scheduled payment will go through', opp:'"Will auto-pay on selected date" confirmation with exact amount + bank shown' },
+            { stage:'4 · Auto-pay prompt', action:'After confirming · sees "Switch to auto-pay? Save 2 taps next month"', emotion:'Curious — considers setting up recurring', pain:'Worried about auto-pay taking wrong amount', opp:'"Auto-pay uses the exact bill amount each month — never more" reassurance' },
+            { stage:'5 · Confirmation', action:'Scheduled · receipt saved · next bill estimate "~14 Jun 2026"', emotion:'Satisfied — done in under 2 minutes', pain:'Wants to know when EDL confirms', opp:'"EDL updates within 1–2 working days — you\'ll be notified when confirmed"' },
+          ]} />
+      </div>
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 10 — Constraints + Competitive
+// ═══════════════════════════════════════════════════════════════
+function P_Constraints() {
+  return (
+    <PubFinalPage title="Design constraints &amp; competitive reference"
+      subtitle="The rules of the game · what we're learning from" page={10} total={TOTAL}>
+      <span className="pub-overline">Design constraints · 10 rules</span>
+      <div style={{ marginBottom: 14 }}><PubFinalConstraints /></div>
+      <span className="pub-overline">Competitive reference · what to borrow, what to avoid</span>
+      <PubCompetitive />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 11 — Onboarding
+// ═══════════════════════════════════════════════════════════════
+function P_Onboarding() {
+  return (
+    <FinalWfPage page={11}
+      title="Onboarding"
+      subtitle="First-time setup · NIC-linked auto-fill · Sinhala/Tamil/English from screen one"
+      banner="The 8 onboarding screens establish the trust foundation. Three patterns recur throughout the app: green auto-fill (verified DRP data), the amber CTA, and plain-language explanations of every data ask."
+      scale={0.50} gap={18}
+      items={[
+        { Comp: O1_Language, label:'O1 · Language selection' },
+        { Comp: O2_Welcome, label:'O2 · Welcome carousel' },
+        { Comp: O3_NIC, label:'O3 · NIC entry + verify' },
+        { Comp: O3c_OTP, label:'O3c · OTP confirm' },
+        { Comp: O3d_CreatePassword, label:'O3d · Create password' },
+        { Comp: O4_AutoFillPreview, label:'O4 · Auto-fill preview' },
+        { Comp: O5_Profile, label:'O5 · Profile setup' },
+        { Comp: O6_Bank, label:'O6 · Add bank account' },
+        { Comp: O7_Permissions, label:'O7 · Permissions' },
+        { Comp: O8_Done, label:'O8 · Done' },
+      ]}
+      annotations={[
+        { label:'O1 · Language selection', body:'Affects all subsequent screens — not a preference setting' },
+        { label:'O3 · NIC entry + verify', body:'DOB derived from NIC silently — triggers under-18 routing if applicable' },
+        { label:'O4 · Auto-fill preview', body:'The most important trust moment in onboarding' },
+        { label:'O6 · Add bank account', body:'Required for GovPay & QR Pay · skippable — can be added later from Profile' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 12 — Authentication
+// ═══════════════════════════════════════════════════════════════
+function P_Auth() {
+  return (
+    <PubFinalPage title="Authentication"
+      subtitle="Returning users · biometric · under-18 routing · account recovery"
+      page={12} total={TOTAL}>
+      <div className="pub-section-banner">
+        <p style={{ fontFamily:'Kalam', fontSize: 14, lineHeight: 1.45, margin: 0 }}>
+          Returning users sign in with NIC + password or biometric. A critical fork exists:
+          if the NIC's embedded date-of-birth resolves to under 18, the password field disappears
+          and the user is routed to the family sign-in flow. The parent must approve before the
+          child gains access.
+        </p>
+      </div>
+      <PubWfRow
+        scale={0.50} gap={18}
+        items={[
+          { Comp: A1_LoginPhone, label:'A1 · NIC + password' },
+          { Comp: A2_Biometric, label:'A2 · Biometric login' },
+          { Comp: L2_Under18Detected, label:'A3 · Under-18 detected' },
+          { Comp: L3_FamilySignIn, label:'A4 · Family sign-in' },
+          { Comp: L4_ParentApproval, label:'A5 · Parent approval' },
+          { Comp: A3_ForgotPin, label:'A6 · Reset PIN' },
+        ]}
+      />
+      <div style={{ marginTop: 10, padding: 10, background:'#fff8ed', borderLeft:'3px solid #d97706', borderRadius: 4,
+        fontFamily:'Caveat', fontSize: 16, fontStyle:'italic', color:'#4a4640', lineHeight: 1.35 }}>
+        New to Lanka Seva? Start the one-time setup with your NIC — no separate registration needed.
+      </div>
+      <AnnoBlock items={[
+        { label:'A1 · NIC + password', body:'"Sign in as a family member" is the entry point for child account access — visible to all returning users' },
+        { label:'A2 · Biometric login', body:'Face ID / Fingerprint — replaces password for returning users' },
+        { label:'A3 · Under-18 detected', body:'Age derived from NIC number — the user is never asked to confirm age' },
+        { label:'A4 · Family sign-in', body:"Child enters parent's mobile number — OTP sent to parent" },
+        { label:'A5 · Parent approval', body:'10-minute timer visible on both parent and child screens simultaneously' },
+        { label:'A6 · Reset PIN', body:'3-step re-verification: NIC confirm → OTP → set new PIN' },
+      ]} />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 13 — Home & Notifications
+// ═══════════════════════════════════════════════════════════════
+function P_Home() {
+  return (
+    <FinalWfPage page={13}
+      title="Home &amp; notifications"
+      subtitle="Personalised · actionable · context-aware"
+      banner="The home screen shows only actionable items — not a generic welcome. The hero card surfaces what needs attention above everything else. Notifications deep-link to the relevant screen, never to home — closing the loop on every alert."
+      scale={0.60} gap={28}
+      items={[
+        { Comp: H1v2_HomeV2, label:'H1 · Home dashboard' },
+        { Comp: H2_Notifications, label:'H2 · Notifications centre' },
+      ]}
+      annotations={[
+        { label:'H1 · Home dashboard', body:'Hero card surfaces urgent actions · bills show only when due · expiring soon section dismissible · recent activity below' },
+        { label:'H2 · Notifications centre', body:'Filter tabs · 6 notification types · unread dots · timestamps · every notification deep-links to the relevant screen' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 14 — Services: Browse & Detail
+// ═══════════════════════════════════════════════════════════════
+function P_Services1() {
+  return (
+    <FinalWfPage page={14}
+      title="Services · browse &amp; detail"
+      subtitle="Task-first · 8 sectors · 34 services · fully online where possible"
+      banner="Citizens think in tasks, not departments. The 8-sector grid uses recognisable nouns — not ministry names. Every service shows an availability tag upfront so users can plan: Full online · Partial · Info only."
+      scale={0.50} gap={20}
+      items={[
+        { Comp: S1_Services, label:'S1 · Services hub · 8 sectors' },
+        { Comp: S2_Sector, label:'S2 · Sector detail · Transport' },
+        { Comp: S3_ServiceDetail, label:'S3 · Service detail · Traffic Fine Payment' },
+        { Comp: M1_Search, label:'S7a · Search results' },
+        { Comp: M1b_SearchEmpty, label:'S7b · Search empty state' },
+      ]}
+      annotations={[
+        { label:'S1 · Services hub', body:'8 sectors in 2-column grid · Bills & Payments as a separate section below' },
+        { label:'S2 · Sector detail · Transport', body:'Each row shows availability tag upfront before the user commits' },
+        { label:'S3 · Service detail · Traffic Fine Payment', body:'Requirements, time, fees all visible before starting · NIC pre-filled confirmed' },
+        { label:'S7a · Search results', body:'Results cross sectors · GOV PAY and PARTIAL tags show payment method' },
+        { label:'S7b · Search empty state', body:'Suggestion chips prevent dead ends — never show a blank page' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 15 — Services: Payment Flow
+// ═══════════════════════════════════════════════════════════════
+function P_Services2() {
+  return (
+    <FinalWfPage page={15}
+      title="Services · the payment flow"
+      subtitle="One pattern · every payment · learn it once, use it forever"
+      banner="One pattern, every payment. Step 1: enter details with NIC auto-fill. Step 2: review breakdown with bank selector. Step 3: official receipt with QR verification. Fines, bills, fees, renewals — all use this exact flow."
+      scale={0.55} gap={24}
+      items={[
+        { Comp: S4_PayStep1, label:'S4 · Step 1 · enter details' },
+        { Comp: S5_PayStep2, label:'S5 · Step 2 · review & pay' },
+        { Comp: S6_PaySuccess, label:'S6 · Step 3 · receipt' },
+      ]}
+      annotations={[
+        { label:'S4 · Step 1', body:'NIC + name auto-filled · only fine reference number is manual' },
+        { label:'S5 · Step 2', body:'Bank account pre-selected · biometric confirms after tapping Confirm' },
+        { label:'S6 · Step 3 · receipt', body:'"Feels like paper" receipt · QR verification seal · saveable to Profile' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 16 — Bills & Payments
+// ═══════════════════════════════════════════════════════════════
+function P_Bills() {
+  return (
+    <FinalWfPage page={16}
+      title="Bills &amp; payments"
+      subtitle="EDL · NWSDB · SLTMobitel · Dialog · IRD · toll · monthly recurring"
+      banner="The bills hub goes beyond just paying — anomaly alerts explain unexpected spikes, a 6-month chart compares against the user's own average, and scheduling lets the user pay on payday rather than the bill's due date. Auto-pay always uses the exact billed amount."
+      scale={0.45} gap={16}
+      items={[
+        { Comp: S7_BillsHub, label:'B1 · Bills hub' },
+        { Comp: S7b_AddBillAccount, label:'B2 · Add bill account' },
+        { Comp: B1_EnhancedBill, label:'B3 · EDL detail' },
+        { Comp: B1b_ScheduleSheet, label:'B4 · Schedule payment' },
+        { Comp: B2_MultipleAccounts, label:'B5 · Multiple accounts' },
+        { Comp: S9_BillSuccess, label:'B6 · Bill paid' },
+        { Comp: B3_BillHistory, label:'B7 · Payment history' },
+      ]}
+      annotations={[
+        { label:'EDL note', body:'Electricity Distribution Lanka (EDL) replaced Ceylon Electricity Board on 9 March 2026. All electricity screens use the new branding.' },
+        { label:'B3 · EDL detail', body:'Usage anomaly alert + average line on chart + schedule + auto-pay nudge' },
+        { label:'B5 · Multiple accounts', body:'Users can nickname each account · Home + Shop tracked separately' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 17 — QR Pay
+// ═══════════════════════════════════════════════════════════════
+function P_QR() {
+  return (
+    <FinalWfPage page={17}
+      title="QR Pay"
+      subtitle="LankaQR · scan · show · fuel · request · 400,000+ merchants"
+      banner="QR Pay is the centre raised button — the most prominent affordance in the app. The scanner is the only dark screen in the whole product. Fuel quota uses the same QR primitive but tracks monthly allocation per registered vehicle."
+      scale={0.42} gap={14}
+      items={[
+        { Comp: Q1_QRSheet, label:'Q1 · Mode selector' },
+        { Comp: Q2_Scanner, label:'Q2 · Scanner' },
+        { Comp: M2_QRError, label:'Q3 · QR error' },
+        { Comp: Q3_PayReview, label:'Q4 · Payment review' },
+        { Comp: Q4_QRSuccess, label:'Q5 · Payment sent' },
+        { Comp: Q5_ShowMyQR, label:'Q6 · Show my QR' },
+        { Comp: Q6_FuelQuota, label:'Q7 · Fuel quota' },
+        { Comp: Q7_Request, label:'Q8 · Request payment' },
+      ]}
+      annotations={[
+        { label:'Q2 · Scanner', body:'Only dark screen in the app · camera viewport reads as a tool' },
+        { label:'Q3 · QR error', body:'3 possible causes shown · never a dead end · always offers alternative action' },
+        { label:'Q6 · Show my QR', body:'Dynamic QR refreshes every 60 seconds · security notice always visible' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 18 — Profile: Identity & Documents
+// ═══════════════════════════════════════════════════════════════
+function P_Profile1() {
+  return (
+    <FinalWfPage page={18}
+      title="Profile · identity &amp; documents"
+      subtitle="Blue identity card · auto-syncing wallet · OCR upload · renewal deep-links"
+      banner="Profile is the user's identity in Lanka Seva. Three document types: auto-sync (NIC, licence) refresh from source departments; manual + OCR (passport, birth cert) use the camera-led upload flow with the same green auto-fill pattern as elsewhere. Every document carries a verification QR that staff can scan to confirm authenticity."
+      scale={0.45} gap={14}
+      items={[
+        { Comp: P1_Profile, label:'P1 · Profile main' },
+        { Comp: P2_DocWallet, label:'P2 · Document wallet' },
+        { Comp: P3_DocDetail, label:'P3 · Driving licence' },
+        { Comp: D2_Passport, label:'P4 · Passport' },
+        { Comp: D1a_Upload, label:'P5a · OCR · instructions' },
+        { Comp: D1b_Camera, label:'P5b · OCR · camera' },
+        { Comp: D1c_Review, label:'P5c · OCR · review' },
+        { Comp: D1d_Submitted, label:'P5d · OCR · submitted' },
+      ]}
+      annotations={[
+        { label:'P4 · Passport', body:'Only document styled as a physical card · MRZ blurred for privacy' },
+        { label:'P5c · OCR · review', body:'Extracted data uses the same green auto-fill pattern as NIC onboarding' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 19 — Profile: Bank, History & Settings
+// ═══════════════════════════════════════════════════════════════
+function P_Profile2() {
+  return (
+    <FinalWfPage page={19}
+      title="Profile · bank, history &amp; settings"
+      subtitle="Bank accounts · application history · accessibility · security"
+      banner="The application history screen gives every submission a real-time status pill and a vertical progress timeline showing exactly which department is currently handling it. Settings carry Sri Lanka-appropriate defaults: notifications on, reduce motion on for older devices."
+      scale={0.42} gap={14}
+      items={[
+        { Comp: D3_RenewalDeeplink, label:'P6 · Renewal deep-link' },
+        { Comp: P5_AddBank, label:'P7 · Add bank' },
+        { Comp: P6_AppHistory, label:'P8 · Applications' },
+        { Comp: P7_AppStatus, label:'P9 · Application status' },
+        { Comp: M4_EditProfile, label:'P10 · Edit profile' },
+        { Comp: P8_Settings, label:'P11 · Settings' },
+        { Comp: P9_Theme, label:'P12 · Appearance' },
+        { Comp: P10_A11y, label:'P13 · Accessibility' },
+        { Comp: P11_Security, label:'P14 · Security' },
+      ]}
+      annotations={[
+        { label:'P6 · Renewal deep-link', body:'Notification for expiring document deep-links directly to this screen' },
+        { label:'P9 · Application status', body:'Vertical timeline shows each department step · Next action always explicit' },
+        { label:'P13 · Accessibility', body:'Font size slider with live preview · simplified mode for low-literacy users' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 20 — Locate
+// ═══════════════════════════════════════════════════════════════
+function P_Locate() {
+  return (
+    <FinalWfPage page={20}
+      title="Locate"
+      subtitle="Nearest offices · officer availability · before you travel"
+      banner="The officer availability checker is Bandara's killer feature — knowing whether the Grama Niladhari is actually at the desk before taking a 12km bus trip. Status is updated every 2 hours by the office itself (never crowdsourced). The empty state shows province-level fallback for remote areas."
+      scale={0.50} gap={20}
+      items={[
+        { Comp: L1_Locate, label:'L1 · Locate main' },
+        { Comp: M3_LocateEmpty, label:'L2 · Empty state · rural' },
+        { Comp: L2_OfficeDetail, label:'L3 · Office detail' },
+        { Comp: L3_Officers, label:'L4 · Officer availability' },
+      ]}
+      annotations={[
+        { label:'L4 · Officer availability', body:'Updated every 2 hours · never crowdsourced · today / tomorrow / this week tabs' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 21 — Family & Children: Setup
+// ═══════════════════════════════════════════════════════════════
+function P_Family1() {
+  return (
+    <FinalWfPage page={21}
+      title="Family &amp; children"
+      subtitle="Birth-to-adulthood government services · every citizen served at every age"
+      banner="Under-16s have no NIC, so they cannot have their own account. They access Lanka Seva through their parent's account via the birth certificate and Registrar General's verification. The child's interface uses amber identity (never blue), has 4 tabs (Emergency replaces Locate), and shows an 'Under Sampath's account' caption on every screen. QR Pay is intentionally absent."
+      scale={0.42} gap={14}
+      items={[
+        { Comp: V3_A1_Household, label:'F1 · Household members' },
+        { Comp: V3_A2_BirthCert, label:'F2 · Add child · Step 1' },
+        { Comp: V3_A3_Verified, label:'F3 · Add child · Step 2' },
+        { Comp: V3_A4_Setup, label:'F4 · Add child · Step 3' },
+        { Comp: V3_A5_Added, label:'F5 · Added!' },
+        { Comp: V3_C1_ChildProfile, label:'F6 · Child profile (parent view)' },
+        { Comp: V3_C2_ChildHome, label:'F7 · Child home (restricted)' },
+        { Comp: V3_C3_ChildServices, label:'F8 · Child services' },
+        { Comp: V3_H1_HealthCard, label:'F9 · Child health card' },
+        { Comp: V3_H2_Immunisation, label:'F10 · Immunisations' },
+        { Comp: V3_H3_BookAppt, label:'F11 · Book appointment' },
+      ]}
+      annotations={[
+        { label:'F1 · Household members', body:'Now a core feature · live in this concept' },
+        { label:'F7 · Child home (restricted)', body:'4 tabs only · no QR Pay · Emergency tab replaces Locate' },
+        { label:'F7 + F8 · Child screens', body:'Amber identity card instead of blue · "Under Sampath\'s account" visible on every screen · persistent footer confirms account context' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 22 — Family & Children: Transitions & Approval
+// ═══════════════════════════════════════════════════════════════
+function P_Family2() {
+  return (
+    <FinalWfPage page={22}
+      title="Family &amp; children · transitions &amp; approval"
+      subtitle="Age 16 unlocks NIC · age 18 separates account · guardian approval system"
+      banner="At age 16, the child becomes eligible for an NIC and a teen account — own login, but still linked to the parent. At 18 the system separates the account completely. All history (health, education, documents) transfers automatically. The guardian approval system enforces 'always require approval' for payments, document sharing, and account changes — these toggles are locked on."
+      scale={0.42} gap={14}
+      items={[
+        { Comp: V3_T1a_Birthday16Child, label:'F12 · Age 16 · child' },
+        { Comp: V3_T1b_Birthday16Parent, label:'F13 · Age 16 · parent' },
+        { Comp: V3_T1c_LinkNIC, label:'F14 · Link NIC · upgrade' },
+        { Comp: V3_T2a_Birthday18Child, label:'F15 · Age 18 · child' },
+        { Comp: V3_T2b_Birthday18Parent, label:'F16 · Age 18 · parent' },
+        { Comp: V3_T2c_FirstAdultHome, label:'F17 · First adult home' },
+        { Comp: V3_G1_ApprovalParent, label:'F18 · Approval request' },
+        { Comp: V3_G2_ChildWaiting, label:'F19 · Child waiting' },
+        { Comp: V3_G3_ApprovalSettings, label:'F20 · Approval settings' },
+      ]}
+      annotations={[
+        { label:'F17 · First adult home', body:'Adult tab bar returns · QR Pay unlocks · new services announced via pills' },
+        { label:'F18 + F19 · Approval system', body:'10-minute timer synced on both parent and child screens simultaneously' },
+        { label:'F20 · Approval settings', body:'Payments, document sharing, account changes always locked · health and education toggleable by parent' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 23 — Life-stage diagram (new)
+// ═══════════════════════════════════════════════════════════════
+function P_LifeStage() {
+  return (
+    <PubFinalPage title="Services from birth to adulthood"
+      subtitle="Every Sri Lankan citizen served at every life stage"
+      page={23} total={TOTAL}>
+      <PubLifeStageFinal />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 24 — Supporting & Accessibility
+// ═══════════════════════════════════════════════════════════════
+function P_Supporting() {
+  return (
+    <FinalWfPage page={24}
+      title="Supporting &amp; accessibility"
+      subtitle="Offline · errors · emergency · simplified mode · biometric overlay"
+      banner="The edges of any app are where trust is won or lost. Lanka Seva's offline mode keeps documents and the fuel QR usable without internet. The payment uncertainty screen — for when a payment may or may not have gone through — is the highest-trust screen in the product. Emergency (1990) needs no login. Simplified mode is designed for the Sampath persona: 4 big buttons, 18px text, 72px hit targets."
+      scale={0.42} gap={14}
+      items={[
+        { Comp: X1_Offline, label:'X1 · Offline mode' },
+        { Comp: X2_Error, label:'X2 · Generic error' },
+        { Comp: X3_PaymentTimeout, label:'X3 · Payment uncertainty' },
+        { Comp: X5_BiometricPrompt, label:'X4 · Biometric overlay' },
+        { Comp: X6_LangSwitch, label:'X5 · Language sheet' },
+        { Comp: X7_Emergency, label:'X6 · 1990 · Suwa Seriya' },
+        { Comp: X8_Simplified, label:'X7 · Simplified mode' },
+        { Comp: X4_AutofillDemo, label:'X8 · Auto-fill demo' },
+      ]}
+      annotations={[
+        { label:'X3 · Payment uncertainty', body:'Highest-trust screen in the product · refund commitment explicitly stated' },
+        { label:'X4 · Biometric overlay', body:'Appears over Step 2 of payment flow · no extra navigation step' },
+        { label:'X7 · Simplified mode', body:'72px tap targets · 18px font · 4 actions only · for the Sampath persona' },
+      ]}
+    />
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PAGE 25 — Let's Continue This Conversation
+// ═══════════════════════════════════════════════════════════════
+function P_Conversation() {
+  return (
+    <PubFinalPage title="Let's continue this conversation"
+      subtitle="Lanka Seva is a concept — help make it better"
+      page={25} total={TOTAL}>
+      <PubConversation />
+    </PubFinalPage>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Root: assemble all 26 pages
+// ═══════════════════════════════════════════════════════════════
+function App() {
+  return (
+    <div className="pub-root pub-final">
+      {/* Page 01 — Cover */}
+      <PubFinalCover />
+      {/* Pages 02–10 — Research, personas, HMW, solution, structure, journeys, constraints */}
+      <P_Problem />
+      <P_Research />
+      <P_Personas />
+      <P_HMW />
+      <P_Solution />
+      <P_Structure />
+      <P_Journey1 />
+      <P_Journey23 />
+      <P_Constraints />
+      {/* Pages 11–22 — Wireframe sections */}
+      <P_Onboarding />
+      <P_Auth />
+      <P_Home />
+      <P_Services1 />
+      <P_Services2 />
+      <P_Bills />
+      <P_QR />
+      <P_Profile1 />
+      <P_Profile2 />
+      <P_Locate />
+      <P_Family1 />
+      <P_Family2 />
+      {/* Page 23 — Life-stage infographic */}
+      <P_LifeStage />
+      {/* Page 24 — Supporting & accessibility */}
+      <P_Supporting />
+      {/* Page 25 — Open discussion */}
+      <P_Conversation />
+      {/* Page 26 — Closing */}
+      <PubClosingFinal />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

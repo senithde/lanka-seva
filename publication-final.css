@@ -1,0 +1,493 @@
+/* publication-final.css — overrides for the final publication version.
+   Hides in-screen "anno" floats (annotations move below screens),
+   replaces page footer format, and adds a cleaner closing page. */
+
+/* Hide the floating in-screen annotations on the final publication page only. */
+.pub-final .anno {
+  display: none !important;
+}
+
+/* Override the pub-foot layout: disclaimer left, designer right, page number CENTRED. */
+.pub-final .pub-foot {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 24px;
+}
+.pub-final .pub-foot .disclaimer {
+  margin-right: 0;
+  text-align: left;
+}
+.pub-final .pub-foot .page-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #4a4640;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.pub-final .pub-foot .designer {
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #4a4640;
+}
+.pub-final .pub-foot .designer .name {
+  font-family: 'Kalam', cursive;
+  font-size: 13px;
+  color: #1a1815;
+  font-weight: 700;
+  display: block;
+}
+
+/* Cleaner annotation caption layout on final publication. */
+.pub-anno-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 18px;
+}
+.pub-anno-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  font-family: 'Kalam', cursive;
+  align-items: baseline;
+}
+.pub-anno-row .label {
+  font-weight: 700;
+  color: #1a1815;
+  font-size: 13px;
+}
+.pub-anno-row .body {
+  font-family: 'Caveat', cursive;
+  font-style: italic;
+  color: #4a4640;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+/* Final page heading style */
+.pub-final .pub-head h2 {
+  font-size: 40px;
+}
+
+/* Reading guide block on cover */
+.pub-reading-guide {
+  position: absolute;
+  bottom: 110px;
+  left: 0;
+  background: #fff;
+  border: 1.8px solid #1a1815;
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 0 #1a1815;
+  max-width: 380px;
+  font-family: 'Kalam', cursive;
+}
+.pub-reading-guide .lab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d97706;
+  margin-bottom: 4px;
+}
+.pub-reading-guide .body {
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+/* Life stage diagram */
+.pub-lifestage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.pub-ls-stage {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  padding-bottom: 28px;
+  align-items: flex-start;
+}
+.pub-ls-marker-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.pub-ls-marker {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: #fcfaf5;
+  border: 3px solid #1a1815;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+  font-size: 16px;
+  color: #1a1815;
+  box-shadow: 0 3px 0 #1a1815;
+  text-align: center;
+  line-height: 1.05;
+}
+.pub-ls-marker.star {
+  width: 84px; height: 84px;
+  background: #d97706;
+  color: white;
+  font-size: 20px;
+}
+.pub-ls-marker.green {
+  width: 84px; height: 84px;
+  background: #1e9459;
+  color: white;
+  font-size: 20px;
+}
+.pub-ls-line {
+  flex: 1;
+  width: 3px;
+  border-left: 2.5px dashed #c8c4be;
+  margin-top: 8px;
+  min-height: 30px;
+}
+.pub-ls-stage:last-child .pub-ls-line { display: none; }
+
+.pub-ls-content {
+  padding-top: 4px;
+}
+.pub-ls-overline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d97706;
+  margin-bottom: 4px;
+  display: block;
+}
+.pub-ls-label {
+  font-family: 'Kalam', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin: 0 0 4px;
+}
+.pub-ls-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #4a4640;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.pub-ls-mini {
+  background: #fff;
+  border: 1.8px solid #1a1815;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: 'Kalam', cursive;
+  font-size: 12.5px;
+  line-height: 1.4;
+  flex: 1;
+}
+.pub-ls-mini.amber { background: #fff8ed; border-color: #d97706; }
+.pub-ls-mini.blue { background: #f0f4fa; border-color: #2b5fa8; }
+.pub-ls-mini.green { background: #e8f5ee; border-color: #1e9459; }
+.pub-ls-mini b {
+  display: block;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 4px;
+  font-family: 'Kalam', cursive;
+  color: #1a1815;
+}
+.pub-ls-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.pub-ls-list {
+  font-family: 'Kalam', cursive;
+  font-size: 13.5px;
+  line-height: 1.55;
+  padding-left: 14px;
+  margin: 0;
+}
+.pub-ls-highlight {
+  background: #d97706;
+  color: white;
+  border: 2px solid #1a1815;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  font-family: 'Kalam', cursive;
+}
+.pub-ls-highlight.green-bg {
+  background: #1e9459;
+}
+.pub-ls-highlight .ttl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 4px;
+}
+.pub-ls-highlight .body {
+  font-family: 'Kalam', cursive;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.pub-ls-footer {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: #fff8ed;
+  border-left: 3px solid #d97706;
+  font-family: 'Caveat', cursive;
+  font-style: italic;
+  font-size: 16px;
+  color: #4a4640;
+  line-height: 1.4;
+}
+.pub-ls-intro {
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-style: italic;
+  font-size: 20px;
+  color: #d97706;
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+
+/* Conversation page large question cards */
+.pub-conv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.pub-conv .q {
+  background: #fff;
+  border: 1.8px solid #1a1815;
+  border-radius: 10px;
+  padding: 16px 18px 16px 56px;
+  font-family: 'Kalam', cursive;
+  font-size: 16px;
+  line-height: 1.4;
+  position: relative;
+  min-height: 80px;
+}
+.pub-conv .q::before {
+  content: '?';
+  position: absolute;
+  left: 14px; top: 14px;
+  background: #d97706;
+  color: white;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid #1a1815;
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.pub-conv-close {
+  text-align: center;
+  font-family: 'Kalam', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1815;
+  margin-top: 22px;
+  padding: 14px;
+  background: #fff8ed;
+  border: 2px dashed #d97706;
+  border-radius: 8px;
+}
+
+/* Closing page */
+.pub-closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  padding: 40px 80px;
+}
+.pub-closing h1 {
+  font-family: 'Kalam', cursive;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0 0 30px;
+  letter-spacing: -1.5px;
+  max-width: 1100px;
+}
+.pub-closing .lead {
+  font-family: 'Kalam', cursive;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #1a1815;
+  max-width: 900px;
+  margin-bottom: 18px;
+}
+.pub-closing .quote {
+  font-family: 'Caveat', cursive;
+  font-style: italic;
+  font-size: 28px;
+  color: #d97706;
+  max-width: 900px;
+  line-height: 1.3;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+.pub-closing .designer-card {
+  background: #fff;
+  border: 2.5px solid #1a1815;
+  border-radius: 12px;
+  padding: 22px 32px;
+  box-shadow: 0 5px 0 #1a1815;
+  font-family: 'Kalam', cursive;
+}
+.pub-closing .designer-card .name {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.pub-closing .designer-card .role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #4a4640;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.pub-closing .designer-card .avatar {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  border: 3px solid #1C1A16;
+  box-shadow: 0 5px 0 #1C1A16;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 14px;
+  background: #fde8c4;
+}
+.pub-closing .designer-card .links-row {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #d97706;
+  line-height: 1.7;
+  margin-top: 6px;
+}
+.pub-closing .designer-card .links-row a {
+  color: #d97706;
+  text-decoration: none;
+  border-bottom: 1px dashed #d97706;
+}
+.pub-closing .designer-card .links-row .ic {
+  display: inline-block;
+  width: 14px;
+  margin-right: 6px;
+  color: #1C1A16;
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+}
+.pub-closing .invite-lines {
+  margin-top: 18px;
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  color: #4a4640;
+  font-style: italic;
+  line-height: 1.6;
+}
+.pub-closing .full-disclaimer {
+  margin-top: 30px;
+  padding: 14px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #4a4640;
+  line-height: 1.5;
+  max-width: 900px;
+  border-top: 1.5px dashed #c8c4be;
+}
+
+/* Tweak Pub Cover for final */
+.pub-final .pub-cover h1 {
+  font-size: 90px;
+}
+.pub-final .pub-cover .scripts {
+  font-size: 44px;
+}
+.pub-final .pub-cover .monogram {
+  bottom: 130px;
+  right: 80px;
+  width: auto; height: auto;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: block;
+  padding: 0;
+}
+.pub-final .pub-cover .monogram > .ls-mark-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.pub-final .pub-cover .monogram .ls-rounded {
+  border-radius: 22px;
+  border: 3px solid #1C1A16;
+  box-shadow: 0 8px 0 #1C1A16;
+  overflow: hidden;
+  line-height: 0;
+}
+.pub-final .pub-cover .monogram .ls-wordmark {
+  font-family: 'Inter','Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+  color: #1C1A16;
+  text-align: center;
+  line-height: 1;
+}
+.pub-final .pub-cover .monogram .ls-sinhala {
+  font-family: 'Noto Sans Sinhala','Inter', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #4a4640;
+  margin-top: 3px;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.pub-final .pub-cover .details {
+  width: 340px;
+}
+
+/* Sitemap clean version — no inline change badges */
+.pub-final .pub-sitemap-note {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: #fff8ed;
+  border-left: 3px solid #d97706;
+  font-family: 'Caveat', cursive;
+  font-style: italic;
+  font-size: 16px;
+  color: #4a4640;
+  line-height: 1.4;
+}
+
+/* "How to read" small block on cover */
+.pub-final .pub-cover .bottom .disclaimer {
+  font-size: 10.5px;
+  max-width: 720px;
+}
+
+/* Source citation style */
+.pub-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  color: #8a8680;
+  font-style: italic;
+  margin-top: 4px;
+}
